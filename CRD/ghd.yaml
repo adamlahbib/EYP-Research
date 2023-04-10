@@ -1,0 +1,37 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: githubdeployments.sample.com
+spec:
+  group: sample.com
+  version: v1alpha1
+  scope: Namespaced
+  names:
+    plural: githubdeployments
+    singular: githubdeployment
+    kind: GithubDeployment
+    shortNames:
+    - ghd
+  validation:
+    openAPIV3Schema:
+      type: object
+      properties:
+        spec:
+          type: object
+          required:
+          - repository
+          - branch
+          - image
+          properties:
+            repository:
+              type: string
+            owner:
+              type: string
+            branch:
+              type: string
+            image:
+              type: string
+            port:
+              type: integer
+            replicas:
+              type: integer
